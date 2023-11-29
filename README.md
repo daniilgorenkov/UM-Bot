@@ -28,7 +28,12 @@ loguru == 0.7.0
 ПК "Универсальный механизм" можно загрузить по ссылке http://www.umlab.ru/pages/index.php?id=3, после установки и получения лицензии
 необходимо создать или загрузить уже готовые файлы конфигурации вагона. В папке `UM_params->Конфигурация вагонов` можно найти две версии полувагона на тележках 18-100,
 их необходимо добавить в корневую папку моделей `...\UM Software Lab\Universal Mechanism\9\samples\Rail_Vehicles`, ВАЖНО скопировать полностью папку, а не отдельные файлы.
-Далее необходимо запустить само приложение UM Simulation
-
+Далее необходимо запустить само приложение UM Simulation, в стартовом окне необходимо выбрать предварительно загруженные конфигурации вагонов, это можно сделать следующими шагами:
+ 1. В левом верхнем углу будет иконка ![Image_alt](https://github.com/daniilgorenkov/UM-Bot/blob/main/images/config_button.png)
+ 2. Потом необходимо выбрать конфигурацию вагона ![Image_alt](https://github.com/daniilgorenkov/UM-Bot/blob/main/images/loaded_empty.png)
+ 3. Вы должны будете увидеть предзагруженное стартовое окно ![Image_alt](https://github.com/daniilgorenkov/UM-Bot/blob/main/images/config_view.png)
+ 4. Далее заходим во вкладку начала интеграции ![Image_alt](https://github.com/daniilgorenkov/UM-Bot/blob/main/images/intergation_button.png)
+ 5. У вас откроется новое окно, в котором необходимо выбрать следующие вкладки для добавления профилей колес ![Image_alt](https://github.com/daniilgorenkov/UM-Bot/blob/main/images/add_profiles.png)
+Все расписанные шаги делаются один раз перед запуском скрипта, для корректной работы бота
 ## Применение бота для автоматизации работы
 ...
