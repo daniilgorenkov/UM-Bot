@@ -35,7 +35,7 @@ loguru == 0.7.0
  4. Далее заходим во вкладку начала интеграции ![Image_alt](https://github.com/daniilgorenkov/UM-Bot/blob/main/images/intergation_button.png)
  5. У вас откроется новое окно, в котором необходимо выбрать следующие вкладки для добавления профилей колес ![Image_alt](https://github.com/daniilgorenkov/UM-Bot/blob/main/images/add_profiles.png)
 Все расписанные шаги делаются один раз перед запуском скрипта, для корректной работы бота
-### Дополнительная информация по работе с ПК УМ http://www.umlab.ru/download/90/rus/gs_um_loco.pdf
+### Дополнительная информация по работе с ПК УМ http://www.umlab.ru/download/90/rus/gs_um_loco.pdf и http://www.umlab.ru/download/90/rus/04_um_simulation_program.pdf
 ## Применение бота для автоматизации работы
 Для начала работы бота необходимо будет указать путь до исполняющего файла `umsimul.exe`  в файле `start_app.py`  в функцию `get_model_path()`,
 также необходимо выбрать пути сохранения файлов и указать их в конструкторе класса `UM_bot`.
