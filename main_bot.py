@@ -1,4 +1,5 @@
 import sys
+import os 
 from time import sleep
 from bot_class import UM_bot
 import keyboard
@@ -23,6 +24,7 @@ faults = ["normal", "polzun15","ellips10"]
 profiles = ["newlocow", "greb_26", "gost","greb_28", "greb_30"]
 speeds = [10,20,30,40,50,60]
 
+general_count = 0
 
 for wagon in range(len(wagons)):                 # прохожусь по всем видам вагонов
     for way in range(len(way_type)):             # прохожусь по всем типам пути
@@ -35,16 +37,23 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
 
                     # Экземпляр класса
                     helper = UM_bot(wagons[wagon],way_type[way],faults[fault],speeds[speed],profiles[profile])
-                    
+
+                    saved_files = len(os.listdir(f"{helper.path_to_save}"))
+
                     # Проверка есть ли уже выполненные расчеты с такими же именами
                     if_exist = helper.if_result_exist()
                     
                     if if_exist == True:
                         logger.info(f"{helper.name} существует")
+                        general_count += 1
                         continue
+
                     elif if_exist == False:
                         logger.info(f"{helper.name} не существует")
                         pass
+
+                    elif general_count != saved_files:
+                        raise ValueError("Программа не отвечает")
 
                     # Проверка на конфигурацию вагона
                     empty = 0
@@ -82,6 +91,8 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     helper.change_wheel_profile()    # изменение профиля колеса
                     helper.start_integration()       # начало расчета
                     helper.clear_speed()             # очистка ячейки скорости
+
+                    general_count += 1
 
 
 
