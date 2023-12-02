@@ -27,7 +27,7 @@ class UM_bot:
         self.name = (str(self.wagon)+"_"+str(self.way_type)+"_"+str(self.fault)+  # название файла сразу с типом вагона и т.д.
                 "_"+str(self.speed)+"_"+str(self.wheel_profile))
         
-        if "curve" in self.way_type:
+        if "curve" in self.way_type: #ограничение скорости в кривой 
             if self.speed > 80:
                 self.speed = 80
 
