@@ -52,7 +52,7 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                         logger.info(f"{helper.name} не существует")
                         pass
 
-                    elif general_count != saved_files:
+                    elif general_count != saved_files:            # Проверка работает ли программа
                         raise ValueError("Программа не отвечает")
 
                     # Проверка на конфигурацию вагона
