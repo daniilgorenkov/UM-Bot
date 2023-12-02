@@ -53,8 +53,10 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     if wagons[wagon] == "empty" and empty == 0:
                         if wagons[wagon] == "loaded" and loaded != 0:
                             helper.exit_model_integration()
+                            logger.info(f"Выход из моделирования, {wagons[wagon]}")
                             
                         helper.choose_config()
+                        logger.info(f"Выбрана конфигурация вагона {wagons[wagon]}")
                         empty += 1
                     
                     elif wagons[wagon] == "empty" and empty != 0:
@@ -63,8 +65,10 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     elif wagons[wagon] == "loaded" and loaded == 0:
                         if wagons[wagon] == "empty" and empty != 0:
                             helper.exit_model_integration()
+                            logger.info(f"Выход из моделирования, {wagons[wagon]}")
                         
                         helper.choose_config()
+                        logger.info(f"Выбрана конфигурация вагона {wagons[wagon]}")
                         loaded += 1
 
                     elif wagons[wagon] == "loaded" and loaded != 0:

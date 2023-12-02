@@ -134,6 +134,8 @@ class UM_bot:
         idetificators_position = (185,603)
         ok_button = (916,662)
 
+        logger.info(f"скорость: {self.speed}")
+
         std_v = round((self.speed/3.6), 2)
 
         root.moveTo(idetificators_position)
@@ -249,6 +251,8 @@ class UM_bot:
         # Развилка для кривых и прямой
         if self.way_type == "curve_350" :
             
+            logger.info(f"геометрия пути: {self.way_type}")
+
             root.moveTo(curve_position,duration=1)
             root.click()
 
@@ -269,6 +273,8 @@ class UM_bot:
 
         elif self.way_type == "curve_650":
             
+            logger.info(f"геометрия пути: {self.way_type}")
+
             root.moveTo(curve_position)
             root.click()
 
@@ -287,6 +293,9 @@ class UM_bot:
             sleep(1)
 
         elif self.way_type == "straight":
+
+            logger.info(f"геометрия пути: {self.way_type}")
+
             root.moveTo(straight_position)
             root.click()
 
@@ -352,10 +361,16 @@ class UM_bot:
         root.click()
 
         if self.fault == "normal":
+
+            logger.info(f"Неисправность: {self.fault}")
+
             root.moveTo(no_fault)
             root.click()
 
         elif "polzun" in self.fault:
+
+            logger.info(f"Неисправность: {self.fault}")
+
             num = self.get_number_from_name()
             logger.info(f"polzun {num}")
             
@@ -385,6 +400,9 @@ class UM_bot:
             root.press("enter")
         
         elif self.fault == "ellips":
+
+            logger.info(f"Неисправность: {self.fault}")
+
             num = self.get_number_from_name()
             logger.info(f"ellips {num}")
 
@@ -435,6 +453,8 @@ class UM_bot:
 
         if self.wheel_profile == "newlocow":
 
+            logger.info(f"Профиль колеса: {self.wheel_profile}")
+
             root.moveTo(newloco_wheel)
             root.click()
             root.click(button="RIGHT")
@@ -442,6 +462,8 @@ class UM_bot:
             root.click()
         
         elif self.wheel_profile == "greb_26":
+
+            logger.info(f"Профиль колеса: {self.wheel_profile}")
             
             root.moveTo(greb_26_wheel)
             root.click()
@@ -451,6 +473,8 @@ class UM_bot:
 
         elif self.wheel_profile == "gost":
 
+            logger.info(f"Профиль колеса: {self.wheel_profile}")
+
             root.moveTo(gost_wheel)
             root.click()
             root.click(button="RIGHT")
@@ -459,6 +483,8 @@ class UM_bot:
         
         elif self.wheel_profile == "greb_28":
 
+            logger.info(f"Профиль колеса: {self.wheel_profile}")
+
             root.moveTo(greb_28_5_wheel)
             root.click()
             root.click(button="RIGHT")
@@ -466,6 +492,8 @@ class UM_bot:
             root.click()
 
         elif self.wheel_profile == "greb_30":
+
+            logger.info(f"Профиль колеса: {self.wheel_profile}")
 
             root.moveTo(greb_30_wheel)
             root.click()
