@@ -399,7 +399,7 @@ class UM_bot:
             root.typewrite(message=num)
             root.press("enter")
         
-        elif self.fault == "ellips":
+        elif "ellips" in self.fault:
 
             logger.info(f"Неисправность: {self.fault}")
 
