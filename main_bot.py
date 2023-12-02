@@ -19,7 +19,7 @@ sleep(4)
 
 wagons = ["empty","loaded"]
 way_type = ["straight", "curve_350", "curve_650"]
-faults = ["normal", "polzun15","ellips1"]
+faults = ["normal", "polzun15","ellips10"]
 profiles = ["newlocow", "greb_26", "gost","greb_28", "greb_30"]
 speeds = [10,20,30,40,50,60]
 
