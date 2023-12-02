@@ -253,20 +253,20 @@ class UM_bot:
             
             logger.info(f"геометрия пути: {self.way_type}")
 
-            root.moveTo(curve_position,duration=1)
+            root.moveTo(curve_position,duration=0)
             root.click()
 
-            root.moveTo(curve_radius_position,duration=1)
+            root.moveTo(curve_radius_position,duration=0)
             root.click()
             self.ctr_a()
             self.backspace()
             self.backspace()
             
-            root.typewrite(str(350),1)
+            root.typewrite(str(350),0)
 
             root.press("enter")
             
-            root.moveTo(ok_button_position,duration=1)
+            root.moveTo(ok_button_position,duration=0)
             root.click()
 
             sleep(1)
@@ -284,7 +284,7 @@ class UM_bot:
             self.backspace()
             self.backspace()
             
-            root.typewrite(str(650),1)
+            root.typewrite(str(650),0)
             root.press("enter")
             
             root.moveTo(ok_button_position)
