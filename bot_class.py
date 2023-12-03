@@ -566,6 +566,3 @@ class UM_bot:
         
         else:
             raise ValueError(f"Что-то не то с {self.name} и путем сохранения файла")
-
-
-
