@@ -20,9 +20,11 @@ class UM_bot:
         
         if self.wagon == "empty":
             self.path_to_save = r"C:\Users\Daniil\Desktop\simulation_results\empty"
+            logger.info("путь сохранения: empty")
         
         elif self.wagon == "loaded":
             self.path_to_save = r"C:\Users\Daniil\Desktop\simulation_results\loaded"
+            logger.info("путь сохранения: loaded")
 
         self.name = (str(self.wagon)+"_"+str(self.way_type)+"_"+str(self.fault)+  # название файла сразу с типом вагона и т.д.
                 "_"+str(self.speed)+"_"+str(self.wheel_profile))
