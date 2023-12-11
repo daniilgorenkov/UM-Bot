@@ -25,6 +25,8 @@ faults = ["normal", "polzun15","ellips10"]
 profiles = ["newlocow", "greb_26", "gost","greb_28", "greb_30"]
 speeds = [10,20,30,40,50,60]
 
+empty = 0
+loaded = 0
 general_count = 0
 
 for wagon in range(len(wagons)):                 # прохожусь по всем видам вагонов
@@ -41,6 +43,9 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
 
                     saved_files = len(os.listdir(f"{helper.path_to_save}"))
 
+                    if saved_files == 0:
+                        general_count == 0
+
                     # Проверка есть ли уже выполненные расчеты с такими же именами
                     if_exist = helper.if_result_exist()
                     
@@ -53,16 +58,16 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                         logger.info(f"{helper.name} не существует")
                         pass
 
-                    if general_count != saved_files:            # Проверка работает ли программа
-                        
-                        raise ValueError("Программа не отвечает")
+                    if saved_files != 0:    
+                        if general_count != saved_files:            # Проверка работает ли программа
+                            
+                            raise ValueError("Программа не отвечает")
+                    
 
                     logger.info(f"всего расчетов сделано {general_count}")
                     logger.info(f"расчетов сохранено {saved_files}")
                     
                     # Проверка на конфигурацию вагона
-                    empty = 0
-                    loaded = 0
 
                     if wagons[wagon] == "empty" and empty == 0:
                         if wagons[wagon] == "loaded" and loaded != 0:
