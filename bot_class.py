@@ -324,7 +324,7 @@ class UM_bot:
             l = len("ellips")
             num = self.fault[l:]
 
-            return f"{num[0]}.{num[1]}"
+            return f"{num[0:1]}.{0}"
         
         else:
             raise ValueError("нет такого типа неисправности")
