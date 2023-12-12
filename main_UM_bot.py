@@ -43,9 +43,6 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
 
                     saved_files = len(os.listdir(f"{helper.path_to_save}"))
 
-                    if saved_files == 0:
-                        general_count == 0
-
                     # Проверка есть ли уже выполненные расчеты с такими же именами
                     if_exist = helper.if_result_exist()
                     
@@ -58,7 +55,8 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                         logger.info(f"{helper.name} не существует")
                         pass
 
-                    if saved_files != 0:    
+                    if wagon == "loaded":
+                        saved_files += 270
                         if general_count != saved_files:            # Проверка работает ли программа
                             
                             raise ValueError("Программа не отвечает")
