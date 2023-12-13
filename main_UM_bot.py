@@ -55,8 +55,8 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                         logger.info(f"{helper.name} не существует")
                         pass
 
-                    if wagon == "loaded":
-                        saved_files += 270
+                    if general_count == 270:
+                        general_count = 0
                         if general_count != saved_files:            # Проверка работает ли программа
                             
                             raise ValueError("Программа не отвечает")
