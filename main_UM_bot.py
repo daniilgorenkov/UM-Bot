@@ -49,21 +49,20 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     if if_exist == True:
                         logger.info(f"{helper.name} существует")
                         general_count += 1
+                        if general_count == 270:
+                            general_count = 0
                         continue
 
                     elif if_exist == False:
                         logger.info(f"{helper.name} не существует")
                         pass
 
-                    if general_count == 270:
-                        general_count = 0
-                        if general_count != saved_files:            # Проверка работает ли программа
-                            
-                            raise ValueError("Программа не отвечает")
-                    
-
                     logger.info(f"всего расчетов сделано {general_count}")
                     logger.info(f"расчетов сохранено {saved_files}")
+
+                    if general_count != saved_files:              # Проверка работает ли программа
+                        raise ValueError("Программа не отвечает")
+                    
                     
                     # Проверка на конфигурацию вагона
 
