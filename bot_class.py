@@ -19,11 +19,11 @@ class UM_bot:
         self.railway_eqipaje_position = (548,602)
         
         if self.wagon == "empty":
-            self.path_to_save = r"C:\Users\Daniil\Desktop\simulation_results\empty"
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/empty"
             logger.info("путь сохранения: empty")
         
         elif self.wagon == "loaded":
-            self.path_to_save = r"C:\Users\Daniil\Desktop\simulation_results\loaded"
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/loaded"
             logger.info("путь сохранения: loaded")
 
         self.name = (str(self.wagon)+"_"+str(self.way_type)+"_"+str(self.fault)+  # название файла сразу с типом вагона и т.д.
@@ -75,7 +75,7 @@ class UM_bot:
 
 
 
-    def start_integration (self):
+    def start_integration (self, v:float):
         """
         Функция начинает выполнение расчета вагона в Универсальном механизме
         """
@@ -85,7 +85,7 @@ class UM_bot:
         results_button = (976, 186)
         save_file_button = (1070, 448)
 
-        path_position = (1316,209)
+        path_position = (1504,209)
         filename_position = (995, 719)
         extention_position = (1005, 740)
         csv_button_position = (1106, 807)
@@ -97,33 +97,33 @@ class UM_bot:
 
         self.sleep_time()
 
-        root.moveTo(button_ok_integration,duration=0) # завершить интеграцию
+        root.moveTo(button_ok_integration,duration=v) # завершить интеграцию
         root.click()
 
-        root.moveTo(results_button,duration=0) # переменная с графика, которую надо сохранить
+        root.moveTo(results_button,duration=v) # переменная с графика, которую надо сохранить
         root.click(button="RIGHT")
 
-        root.moveTo(save_file_button,duration=0) # кнопка сохранить файл
+        root.moveTo(save_file_button,duration=v) # кнопка сохранить файл
         root.click()
 
-        root.moveTo(path_position,duration=0) # навелся на строку пути в проводнике
+        root.moveTo(path_position,duration=v) # навелся на строку пути в проводнике
         root.click()
         root.typewrite(self.path_to_save) # НЕПРАВИЛЬНО ИДЕТ К ЯЧЕЙКЕ ПУТИ ДО ФАЙЛА И ДАЛЕЕ ТОЖЕ
         root.press("enter") # тут возможно намудил
 
-        root.moveTo(filename_position,duration=0) # пишу название файла
+        root.moveTo(filename_position,duration=v) # пишу название файла
         root.click()
         root.typewrite(message=self.name) # название файла
 
-        root.moveTo(extention_position,duration=0) # кнопка выбора расширения
+        root.moveTo(extention_position,duration=v) # кнопка выбора расширения
         root.click()
-        root.moveTo(csv_button_position,duration=0) # выбрать csv разрешение
-        root.click()
-
-        root.moveTo(save_button,duration=0) # сохранить файл в выбранной папке
+        root.moveTo(csv_button_position,duration=v) # выбрать csv разрешение
         root.click()
 
-        root.moveTo(end_integration_position,duration=0) # прервать интеграцию
+        root.moveTo(save_button,duration=v) # сохранить файл в выбранной папке
+        root.click()
+
+        root.moveTo(end_integration_position,duration=v) # прервать интеграцию
         root.click()
 
 
