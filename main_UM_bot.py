@@ -18,7 +18,6 @@ elif running == False:
 
 sleep(4)
 
-
 wagons = ["empty","loaded"]
 way_type = ["straight", "curve_350", "curve_650"]
 faults = ["normal", "polzun15","ellips10"]
