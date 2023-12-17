@@ -25,6 +25,15 @@ faults = ["normal", "polzun15","ellips10"]
 profiles = ["newlocow", "greb_26", "gost","greb_28", "greb_30"]
 speeds = [10,20,30,40,50,60]
 
+# Подсчет количества файлов результатов в одной папке
+l_way_type = len(way_type)
+l_faults = len(faults)
+l_profiles = len(profiles)
+l_speeds = len(speeds)
+
+num_results_folder = l_way_type*l_faults*l_profiles*l_speeds
+
+# Переменные для контроля типа вагона и счетчик выполненных результатов
 empty = 0
 loaded = 0
 general_count = 0
@@ -49,7 +58,7 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     if if_exist == True:
                         logger.info(f"{helper.name} существует")
                         general_count += 1
-                        if general_count == 270:
+                        if general_count == num_results_folder:
                             general_count = 0
                         continue
 
@@ -96,7 +105,7 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     helper.change_fault(True)        # изменение неисправностей на поерхности катания
                                                      # True означает, что ползун вновь образованный
                     helper.change_wheel_profile()    # изменение профиля колеса
-                    helper.start_integration(0.5)       # начало расчета
+                    helper.start_integration(0.1)       # начало расчета
                     helper.clear_speed()             # очистка ячейки скорости
 
                     general_count += 1
