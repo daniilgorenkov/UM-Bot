@@ -1,5 +1,4 @@
 from pywinauto.application import Application
-import pyautogui as root
 
 def get_model_path():
     """Получение полного пути до приложения"""

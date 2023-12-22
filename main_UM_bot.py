@@ -109,5 +109,4 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
 
                     general_count += 1
 
-
-
+print("Расчет окончен")
