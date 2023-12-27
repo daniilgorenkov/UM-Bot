@@ -433,7 +433,7 @@ class UM_bot:
         wheel_rail_position = (98,649)
         wheels_window_position = (45,672)
         wheels_profiles = (51,697)
-        newloco_wheel = (432,733) # -> moveRel(64,58)
+        newwagon_wheel = (432,733) # -> moveRel(64,58)
         greb_26_wheel = (433,749)
         gost_wheel = (448,761)
         greb_28_5_wheel = (452,775)
@@ -453,11 +453,11 @@ class UM_bot:
         root.moveTo(wheels_profiles)
         root.click()
 
-        if self.wheel_profile == "newlocow":
+        if self.wheel_profile == "newwagonw":
 
             logger.info(f"Профиль колеса: {self.wheel_profile}")
 
-            root.moveTo(newloco_wheel)
+            root.moveTo(newwagon_wheel)
             root.click()
             root.click(button="RIGHT")
             root.moveRel(set_for_all)
