@@ -21,7 +21,7 @@ sleep(4)
 wagons = ["empty","loaded"]
 way_type = ["straight", "curve_350", "curve_650"]
 faults = ["normal", "polzun15","ellips10"]
-profiles = ["newwagonw", "greb_26", "gost","greb_28", "greb_30"]
+profiles = ["newwagonw"]  #CHANGE PROFILE , "greb_26", "gost","greb_28", "greb_30"
 speeds = [10,20,30,40,50,60]
 
 # Подсчет количества файлов результатов в одной папке
@@ -57,7 +57,7 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     if if_exist == True:
                         logger.info(f"{helper.name} существует")
                         general_count += 1
-                        if general_count == num_results_folder:
+                        if general_count == num_results_folder:  # обновление переменной для перехода в новую папку
                             general_count = 0
                         continue
 
@@ -69,7 +69,9 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     logger.info(f"расчетов сохранено {saved_files}")
 
                     if general_count != saved_files:              # Проверка работает ли программа
-                        raise ValueError("Программа не отвечает")
+                        if general_count - saved_files == 1:
+                            raise ValueError("Программа не отвечает")
+                        
                     
                     
                     # Проверка на конфигурацию вагона

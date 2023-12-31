@@ -19,11 +19,11 @@ class UM_bot:
         self.railway_eqipaje_position = (548,602)
         
         if self.wagon == "empty":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/empty"
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/empty/newwagonw"
             logger.info("путь сохранения: empty")
         
         elif self.wagon == "loaded":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/loaded"
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/loaded/newwagonw"
             logger.info("путь сохранения: loaded")
 
         self.name = (str(self.wagon)+"_"+str(self.way_type)+"_"+str(self.fault)+  # название файла сразу с типом вагона и т.д.
@@ -433,7 +433,7 @@ class UM_bot:
         wheel_rail_position = (98,649)
         wheels_window_position = (45,672)
         wheels_profiles = (51,697)
-        newwagon_wheel = (432,733) # -> moveRel(64,58)
+        newwagon_wheel = (457,738) # -> moveRel(64,58)
         greb_26_wheel = (433,749)
         gost_wheel = (448,761)
         greb_28_5_wheel = (452,775)
