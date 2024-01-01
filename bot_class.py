@@ -1,6 +1,7 @@
 """Класс работы бота"""
 import os
 import pyautogui as root
+from tqdm import tqdm
 from time import sleep
 from loguru import logger
 
@@ -19,7 +20,7 @@ class UM_bot:
         self.railway_eqipaje_position = (548,602)
         
         if self.wagon == "empty":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/empty/newwagonw"
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results"  #/empty/newwagonw
             logger.info("путь сохранения: empty")
         
         elif self.wagon == "loaded":
@@ -41,23 +42,23 @@ class UM_bot:
         # Выбор времени при расчете в прямой
         if self.way_type == "straight":    
             if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч ждем 21 секунду
-                sleep(21) # время интеграции с запасом
+                self.wait_status_bar(21)          # время интеграции с запасом
             
             elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч ждем 21 секунду
-                sleep(21) # время интеграции с запасом
+                self.wait_status_bar(21)          # время интеграции с запасом
 
             elif 22.22 < round(self.speed/3.6, 2) <= 33.34: # от 80 до 120 км/ч ждем 21 секунду
-                sleep(21) # время интеграции с запасом
+                self.wait_status_bar(21)          # время интеграции с запасом
             else:
                 raise ValueError("Что-то не то с вводимой скоростью")
 
         # Выбор времени при расчете в кривой 350 м
         elif self.way_type == "curve_350":
             if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч ждем 300 секунд
-                sleep(440) # время интеграции с запасом
+                self.wait_status_bar(440)         # время интеграции с запасом
             
             elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч ждем 150 секунд
-                sleep(115) # время интеграции с запасом
+                self.wait_status_bar(115)         # время интеграции с запасом
 
             else:
                 raise ValueError("Что-то не то с вводимой скоростью, возможно она превышает задуманную")
@@ -65,10 +66,10 @@ class UM_bot:
         # Выбор времени при расчете в кривой 650 м
         elif self.way_type == "curve_650":
             if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч ждем  секунд
-                sleep(500) # время интеграции с запасом
+                self.wait_status_bar(550)         # время интеграции с запасом
             
             elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч ждем 120 секунд
-                sleep(120) # время интеграции с запасом
+                self.wait_status_bar(120)         # время интеграции с запасом
 
             else:
                 raise ValueError("Что-то не то с вводимой скоростью, возможно она превышает задуманную")
@@ -568,3 +569,7 @@ class UM_bot:
         
         else:
             raise ValueError(f"Что-то не то с {self.name} и путем сохранения файла")
+    
+    def wait_status_bar(self,num:int):
+        for i in tqdm(range(num),"Ожидание"):
+            sleep(1)
