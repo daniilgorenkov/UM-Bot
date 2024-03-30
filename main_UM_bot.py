@@ -21,8 +21,8 @@ sleep(4)
 wagons = ["empty","loaded"]
 way_type = ["straight", "curve_350", "curve_650"]
 faults = ["normal", "polzun15","ellips10"]
-profiles = ["newwagonw"]  #CHANGE PROFILE , "greb_26", "gost","greb_28", "greb_30"
-speeds = [10,20,30,40,50,60]
+profiles = ["newwagonw", "greb_26", "gost","greb_28", "greb_30"]  #CHANGE PROFILE , "greb_26", "gost","greb_28", "greb_30"
+speeds = [i for i in range(10,130,10)]
 
 # Подсчет количества файлов результатов в одной папке
 l_way_type = len(way_type)
@@ -106,7 +106,7 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     helper.change_fault(True)        # изменение неисправностей на поерхности катания
                                                      # True означает, что ползун вновь образованный
                     helper.change_wheel_profile()    # изменение профиля колеса
-                    helper.start_integration(0.1)       # начало расчета
+                    helper.start_integration(0.5)       # начало расчета
                     helper.clear_speed()             # очистка ячейки скорости
 
                     general_count += 1

@@ -20,11 +20,11 @@ class UM_bot:
         self.railway_eqipaje_position = (548,602)
         
         if self.wagon == "empty":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results"  #/empty/newwagonw
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/empty"  #/empty/newwagonw
             logger.info("путь сохранения: empty")
         
         elif self.wagon == "loaded":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/loaded/newwagonw"
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/loaded"
             logger.info("путь сохранения: loaded")
 
         self.name = (str(self.wagon)+"_"+str(self.way_type)+"_"+str(self.fault)+  # название файла сразу с типом вагона и т.д.
@@ -86,11 +86,11 @@ class UM_bot:
         results_button = (976, 186)
         save_file_button = (1070, 448)
 
-        path_position = (1504,209)
-        filename_position = (995, 719)
-        extention_position = (1005, 740)
-        csv_button_position = (1106, 807)
-        save_button = (1596, 785)
+        path_position = (659,87)
+        filename_position = (602, 604)
+        extention_position = (578, 629)
+        csv_button_position = (363,692)
+        save_button = (788, 672)
         end_integration_position = (477, 908)             
 
         root.moveTo(button_start_integration) # кнопка начать интеграцию
