@@ -439,6 +439,7 @@ class UM_bot:
         gost_wheel = (448,761)
         greb_28_5_wheel = (452,775)
         greb_30_wheel = (453,787)
+        greb_24_wheel = (556,808)
 
         set_for_all = (64,58)
 
@@ -503,9 +504,19 @@ class UM_bot:
             root.click(button="RIGHT")
             root.moveRel(set_for_all)
             root.click()
+        
+        elif self.wheel_profile == "greb_24":
+            
+            logger.info(f"Профиль колеса: {self.wheel_profile}")
+
+            root.moveTo(greb_24_wheel)
+            root.click()
+            root.click(button="RIGHT")
+            root.moveRel(set_for_all)
+            root.click()
 
         else:
-            raise ValueError(f"нет такого типа профиля {self.wheel_profile}")            
+            raise ValueError(f"нет такого типа профиля {self.wheel_profile}, есть `greb_24`, `greb_26`, `greb_28`, `greb_30`, `gost`")            
 
 
     def choose_config(self):
