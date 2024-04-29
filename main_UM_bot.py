@@ -22,7 +22,7 @@ wagons = ["empty","loaded"]
 way_type = ["straight", "curve_350", "curve_650"]
 faults = ["normal", "polzun15","ellips10"]
 profiles = ["newwagonw", "greb_26", "gost","greb_28", "greb_30", "greb_24"]  #CHANGE PROFILE , "greb_26", "gost","greb_28", "greb_30"
-speeds = [i for i in range(10,130,10)]
+speeds = [i for i in range(10,120,10)]
 
 # Подсчет количества файлов результатов в одной папке
 l_way_type = len(way_type)
