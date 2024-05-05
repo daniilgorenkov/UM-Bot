@@ -20,11 +20,11 @@ class UM_bot:
         self.railway_eqipaje_position = (548,602)
         
         if self.wagon == "empty":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/empty"  #/empty/newwagonw
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Side force/empty"  # стоит на боковую силу
             logger.info("путь сохранения: empty")
         
         elif self.wagon == "loaded":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/loaded"
+            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Side force/loaded"
             logger.info("путь сохранения: loaded")
 
         self.name = (str(self.wagon)+"_"+str(self.way_type)+"_"+str(self.fault)+  # название файла сразу с типом вагона и т.д.
@@ -76,20 +76,33 @@ class UM_bot:
 
 
 
-    def start_integration (self, v:float):
+    def start_integration (self, v:float, mode:str = "vertical"):
         """
-        Функция начинает выполнение расчета вагона в Универсальном механизме
+        Функция начинает выполнение расчета вагона в Универсальном механизме и сохраняет результат,
+        mode принимает значения `vertical` и `side` (вертикальная и боковая силы)
         """
 
         button_start_integration = (148, 1000) #кнопка 'интегрирование'
         button_ok_integration = (1056, 600) # кнопка ок после интеграции
-        results_button = (976, 186)
-        save_file_button = (1070, 448)
+        
+        if mode == "vertical":
+            results_button = (976, 186)
+            save_file_button = (1070, 448)
+        
+        elif mode == "side":
+            results_button = (989, 204)
+            save_file_button = (1142,472)
+        
+        else:
+            raise ValueError("Неправильно указан режим расчета")
+            
 
         path_position = (659,87)
+
         filename_position = (602, 604)
         extention_position = (578, 629)
         csv_button_position = (363,692)
+        
         save_button = (788, 672)
         end_integration_position = (477, 908)             
 

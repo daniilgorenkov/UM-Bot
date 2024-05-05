@@ -22,7 +22,7 @@ wagons = ["empty","loaded"]
 way_type = ["straight", "curve_350", "curve_650"]
 faults = ["normal", "polzun15","ellips10"]
 profiles = ["newwagonw", "greb_26", "gost","greb_28", "greb_30", "greb_24"]  #CHANGE PROFILE , "greb_26", "gost","greb_28", "greb_30"
-speeds = [i for i in range(10,120,10)]
+speeds = [i for i in range(10,110,10)]   # Поменять скорости так как неравномерный прокат с тонким гребнем сходит в кривой на 110 км/ч
 
 # Подсчет количества файлов результатов в одной папке
 l_way_type = len(way_type)
@@ -106,7 +106,7 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     helper.change_fault(True)        # изменение неисправностей на поерхности катания
                                                      # True означает, что ползун вновь образованный
                     helper.change_wheel_profile()    # изменение профиля колеса
-                    helper.start_integration(0.5)       # начало расчета
+                    helper.start_integration(0.5,"side")       # начало расчета
                     helper.clear_speed()             # очистка ячейки скорости
 
                     general_count += 1
