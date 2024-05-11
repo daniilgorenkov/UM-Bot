@@ -10,7 +10,8 @@ class UM_bot:
                  way_type: str = None,
                  fault: str = None,
                  speed:int = None,
-                 wheel_profile:str = None):
+                 wheel_profile:str = None,
+                 vertical_and_side:bool = True):
         
         self.wagon = wagon
         self.way_type = way_type
@@ -18,111 +19,62 @@ class UM_bot:
         self.speed = speed
         self.wheel_profile = wheel_profile
         self.railway_eqipaje_position = (548,602)
+        self.t = (1/self.speed)*3600               # t сек
         
-        if self.wagon == "empty":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Side force/empty"  # стоит на боковую силу
-            logger.info("путь сохранения: empty")
-        
-        elif self.wagon == "loaded":
-            self.path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Side force/loaded"
-            logger.info("путь сохранения: loaded")
+        if vertical_and_side:         
+            if self.wagon == "empty":
+                self.side_path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Side force/empty"  # стоит на боковую силу
+                self.vertical_path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Vertical force/empty"
+                logger.info("путь сохранения: empty")
+            
+            elif self.wagon == "loaded":
+                self.side_path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Side force/loaded"
+                self.vertical_path_to_save = r"C:/Users/Daniil/Desktop/simulation_results/Vertical force/loaded"
+                logger.info("путь сохранения: loaded")
 
         self.name = (str(self.wagon)+"_"+str(self.way_type)+"_"+str(self.fault)+  # название файла сразу с типом вагона и т.д.
                 "_"+str(self.speed)+"_"+str(self.wheel_profile))
         
-        if "curve" in self.way_type: #ограничение скорости в кривой 
-            if self.speed > 80:
-                self.speed = 80
+        # if "curve" in self.way_type: #ограничение скорости в кривой 
+        #     if self.speed > 80:
+        #         self.speed = 80
 
     def sleep_time(self):
         """
         Выбор времени на которое бот будет застывать, пока идет расчет
         """
-
-        # Выбор времени при расчете в прямой
-        if self.way_type == "straight":    
-            if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч ждем 21 секунду
-                self.wait_status_bar(21)          # время интеграции с запасом
-            
-            elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч ждем 21 секунду
-                self.wait_status_bar(21)          # время интеграции с запасом
-
-            elif 22.22 < round(self.speed/3.6, 2) <= 33.34: # от 80 до 120 км/ч ждем 21 секунду
-                self.wait_status_bar(21)          # время интеграции с запасом
-            else:
-                raise ValueError("Что-то не то с вводимой скоростью")
-
-        # Выбор времени при расчете в кривой 350 м
-        elif self.way_type == "curve_350":
-            if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч ждем 300 секунд
-                self.wait_status_bar(440)         # время интеграции с запасом
-            
-            elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч ждем 150 секунд
-                self.wait_status_bar(115)         # время интеграции с запасом
-
-            else:
-                raise ValueError("Что-то не то с вводимой скоростью, возможно она превышает задуманную")
+        if self.way_type != "straight" and self.speed < 40:
+            self.wait_status_bar(int(self.t+60))
         
-        # Выбор времени при расчете в кривой 650 м
-        elif self.way_type == "curve_650":
-            if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч ждем  секунд
-                self.wait_status_bar(550)         # время интеграции с запасом
-            
-            elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч ждем 120 секунд
-                self.wait_status_bar(120)         # время интеграции с запасом
-
-            else:
-                raise ValueError("Что-то не то с вводимой скоростью, возможно она превышает задуманную")
+        elif self.way_type != "straight" and self.speed >= 40:
+            self.wait_status_bar(int(self.t+25))
 
 
-
-    def start_integration (self, v:float, mode:str = "vertical"):
-        """
-        Функция начинает выполнение расчета вагона в Универсальном механизме и сохраняет результат,
-        mode принимает значения `vertical` и `side` (вертикальная и боковая силы)
-        """
-
-        button_start_integration = (148, 1000) #кнопка 'интегрирование'
-        button_ok_integration = (1056, 600) # кнопка ок после интеграции
+    def save_files(self,v:float):
+        """Сохранение результатов """
         
-        if mode == "vertical":
-            results_button = (976, 186)
-            save_file_button = (1070, 448)
-        
-        elif mode == "side":
-            results_button = (989, 204)
-            save_file_button = (1142,472)
-        
-        else:
-            raise ValueError("Неправильно указан режим расчета")
-            
+        vertical_results_button = (976, 186)
+        vertical_save_file_button = (1070, 448)
+        side_results_button = (989, 204)
+        side_save_file_button = (1142,472)
 
         path_position = (659,87)
-
         filename_position = (602, 604)
         extention_position = (578, 629)
         csv_button_position = (363,692)
         
         save_button = (788, 672)
-        end_integration_position = (477, 908)             
 
-        root.moveTo(button_start_integration) # кнопка начать интеграцию
-        root.click()
-
-        self.sleep_time()
-
-        root.moveTo(button_ok_integration,duration=v) # завершить интеграцию
-        root.click()
-
-        root.moveTo(results_button,duration=v) # переменная с графика, которую надо сохранить
+        ### СОХРАНЕНИЕ ВЕРТИКАЛЬНОЙ СИЛЫ
+        root.moveTo(vertical_results_button,duration=v) # переменная с графика, которую надо сохранить
         root.click(button="RIGHT")
 
-        root.moveTo(save_file_button,duration=v) # кнопка сохранить файл
+        root.moveTo(vertical_save_file_button,duration=v) # кнопка сохранить файл
         root.click()
 
         root.moveTo(path_position,duration=v) # навелся на строку пути в проводнике
         root.click()
-        root.typewrite(self.path_to_save) # НЕПРАВИЛЬНО ИДЕТ К ЯЧЕЙКЕ ПУТИ ДО ФАЙЛА И ДАЛЕЕ ТОЖЕ
+        root.typewrite(self.vertical_path_to_save) # НЕПРАВИЛЬНО ИДЕТ К ЯЧЕЙКЕ ПУТИ ДО ФАЙЛА И ДАЛЕЕ ТОЖЕ
         root.press("enter") # тут возможно намудил
 
         root.moveTo(filename_position,duration=v) # пишу название файла
@@ -137,6 +89,55 @@ class UM_bot:
         root.moveTo(save_button,duration=v) # сохранить файл в выбранной папке
         root.click()
 
+        ### СОХРАНЕНИЕ БОКОВОЙ СИЛЫ
+        
+        root.moveTo(side_results_button,duration=v) # переменная с графика, которую надо сохранить
+        root.click(button="RIGHT")
+
+        root.moveTo(side_save_file_button,duration=v) # кнопка сохранить файл
+        root.click()
+
+        root.moveTo(path_position,duration=v) # навелся на строку пути в проводнике
+        root.click()
+        root.typewrite(self.side_path_to_save) # НЕПРАВИЛЬНО ИДЕТ К ЯЧЕЙКЕ ПУТИ ДО ФАЙЛА И ДАЛЕЕ ТОЖЕ
+        root.press("enter") # тут возможно намудил
+
+        root.moveTo(filename_position,duration=v) # пишу название файла
+        root.click()
+        root.typewrite(message=self.name) # название файла
+
+        root.moveTo(extention_position,duration=v) # кнопка выбора расширения
+        root.click()
+        # sleep(0.5)
+        root.moveTo(csv_button_position,duration=v) # выбрать csv разрешение
+        root.click()
+
+        root.moveTo(save_button,duration=v) # сохранить файл в выбранной папке
+        root.click()
+
+
+    def start_integration (self, v:float, mode:str = "vertical"):
+        """
+        Функция начинает выполнение расчета вагона в Универсальном механизме и сохраняет результат,
+        mode принимает значения `vertical` и `side` (вертикальная и боковая силы)
+        """
+
+        button_start_integration = (148, 1000) #кнопка 'интегрирование'
+        button_ok_integration = (1056, 600) # кнопка ок после интеграции          
+        end_integration_position = (477, 908)             
+
+        root.moveTo(button_start_integration) # кнопка начать интеграцию
+        root.click()
+
+        self.sleep_time()
+
+        root.moveTo(button_ok_integration,duration=v) # завершить интеграцию
+        root.click()
+
+        ### Сохранение файла с расчетом вертикальной силы
+
+        self.save_files(v)
+
         root.moveTo(end_integration_position,duration=v) # прервать интеграцию
         root.click()
 
@@ -146,6 +147,8 @@ class UM_bot:
         Смена параметра скорости, перменную передавать в км/ч,
         внутри будет перевод в м/с
         """
+        sleep(1)
+        
         self.speed_position = (145,732)
         idetificators_position = (185,603)
         ok_button = (916,662)
@@ -165,6 +168,8 @@ class UM_bot:
         
         root.moveTo(ok_button)
         root.click()
+
+        sleep(1)
 
 
     def clear_speed (self):
@@ -217,30 +222,72 @@ class UM_bot:
 
         self.backspace()
 
-        if self.way_type == "straight":
-            time = 5
+        # if self.way_type == "straight":
+        #     time = 5
 
-        elif self.way_type == "curve_350":
-            if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч модельное время будет 120 с
-                time = 105 # время интеграции с запасом
+        # elif self.way_type == "curve_350":
+        #     if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч модельное время будет 120 с
+        #         time = 105 # время интеграции с запасом
             
-            elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч модельное время будет 30 с
-                time = 32 # время интеграции с запасом
+        #     elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч модельное время будет 30 с
+        #         time = 32 # время интеграции с запасом
 
-        elif self.way_type == "curve_650":
-            if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч модельное время будет 120 с
-                time = 120 # время интеграции с запасом
+        # elif self.way_type == "curve_650":
+        #     if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч модельное время будет 120 с
+        #         time = 120 # время интеграции с запасом
             
-            elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч модельное время будет 30 с
-                time = 30 # время интеграции с запасом
+        #     elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч модельное время будет 30 с
+        #         time = 30 # время интеграции с запасом
         
-        else:
-            raise ValueError("Что-то не так с типом прямой")
+        # else:
+        #     raise ValueError("Что-то не так с типом прямой")
 
-        root.typewrite("{}".format(time))
+        root.typewrite("{}".format(int(self.t)))
 
         root.press("enter")
     
+
+    def set_L1(self):
+        """Установка значения L1 для кривой"""
+
+        L1_position = (94,773)          # L1
+        
+        root.moveTo(L1_position,duration=0)
+        root.click()
+        self.ctr_a()
+        self.backspace()
+        self.backspace()
+        root.typewrite(str(10),0)
+        root.press("enter")
+    
+
+    def set_P11(self):
+        """Установка значения P11 для кривой"""
+        
+        P11_position = (90,797)
+
+        root.moveTo(P11_position,duration=0)
+        root.click()
+        self.ctr_a()
+        self.backspace()
+        self.backspace()
+        root.typewrite(str(140),0)
+        root.press("enter")
+
+
+    def set_S1(self):
+        """Установка значения S1 для кривой"""
+
+        S1_position = (86,817)
+
+        root.moveTo(S1_position,duration=0)
+        root.click()
+        self.ctr_a()
+        self.backspace()
+        self.backspace()
+        root.typewrite(str(800),0)
+        root.press("enter")
+
 
     def change_way_type(self):
         """
@@ -269,17 +316,26 @@ class UM_bot:
             
             logger.info(f"геометрия пути: {self.way_type}")
 
+            # Выбор типа пути Кривая
             root.moveTo(curve_position,duration=0)
             root.click()
 
+            # Установка значения L1 для кривой
+            self.set_L1()
+
+            # Установка значения P11
+            self.set_P11()
+
+            # Установка значения S1
+            self.set_S1()
+
+            # Установка значения R1 для кривой
             root.moveTo(curve_radius_position,duration=0)
             root.click()
             self.ctr_a()
             self.backspace()
             self.backspace()
-            
             root.typewrite(str(350),0)
-
             root.press("enter")
             
             root.moveTo(ok_button_position,duration=0)
@@ -294,6 +350,16 @@ class UM_bot:
             root.moveTo(curve_position)
             root.click()
 
+            # Установка значения L1 для кривой
+            self.set_L1()
+
+            # Установка значения P11
+            self.set_P11()
+
+            # Установка значения S1
+            self.set_S1()
+
+            #Установка значения R1
             root.moveTo(curve_radius_position)
             root.click()
             self.ctr_a()
@@ -576,7 +642,7 @@ class UM_bot:
     def if_result_exist(self):
         """Проверка наличия уже проведенных расчетов в папке сохранения"""
 
-        raw_list_of_results = os.listdir(self.path_to_save)
+        raw_list_of_results = os.listdir(self.vertical_path_to_save)
 
         list_of_results = []
 
@@ -595,5 +661,5 @@ class UM_bot:
             raise ValueError(f"Что-то не то с {self.name} и путем сохранения файла")
     
     def wait_status_bar(self,num:int):
-        for i in tqdm(range(num),"Ожидание"):
+        for _ in tqdm(range(num),"Ожидание"):
             sleep(1)

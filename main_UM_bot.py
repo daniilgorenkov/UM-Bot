@@ -22,7 +22,7 @@ wagons = ["empty","loaded"]
 way_type = ["straight", "curve_350", "curve_650"]
 faults = ["normal", "polzun15","ellips10"]
 profiles = ["newwagonw", "greb_26", "gost","greb_28", "greb_30", "greb_24"]  #CHANGE PROFILE , "greb_26", "gost","greb_28", "greb_30"
-speeds = [i for i in range(10,110,10)]   # Поменять скорости так как неравномерный прокат с тонким гребнем сходит в кривой на 110 км/ч
+speeds = [i for i in range(10,90,10)]   # Поменять скорости так как неравномерный прокат с тонким гребнем сходит в кривой на 110 км/ч
 
 # Подсчет количества файлов результатов в одной папке
 l_way_type = len(way_type)
@@ -49,7 +49,7 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
                     # Экземпляр класса
                     helper = UM_bot(wagons[wagon],way_type[way],faults[fault],speeds[speed],profiles[profile])
 
-                    saved_files = len(os.listdir(f"{helper.path_to_save}"))
+                    saved_files = len(os.listdir(f"{helper.vertical_path_to_save}"))
 
                     # Проверка есть ли уже выполненные расчеты с такими же именами
                     if_exist = helper.if_result_exist()
@@ -99,7 +99,8 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
 
                     elif wagons[wagon] == "loaded" and loaded != 0:
                         pass
-
+                    
+                    
                     helper.change_speed()            # изменение скорости
                     helper.change_time_integration() # изменение времени интеграции
                     helper.change_way_type()         # изменение типа макрогеометрии
