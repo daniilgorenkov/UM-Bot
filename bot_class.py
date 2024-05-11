@@ -222,26 +222,6 @@ class UM_bot:
 
         self.backspace()
 
-        # if self.way_type == "straight":
-        #     time = 5
-
-        # elif self.way_type == "curve_350":
-        #     if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч модельное время будет 120 с
-        #         time = 105 # время интеграции с запасом
-            
-        #     elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч модельное время будет 30 с
-        #         time = 32 # время интеграции с запасом
-
-        # elif self.way_type == "curve_650":
-        #     if round(self.speed/3.6, 2) <= 11.11: # до 40 км/ч модельное время будет 120 с
-        #         time = 120 # время интеграции с запасом
-            
-        #     elif 11.11 < round(self.speed/3.6, 2) <= 22.22: # от 40 до 80 км/ч модельное время будет 30 с
-        #         time = 30 # время интеграции с запасом
-        
-        # else:
-        #     raise ValueError("Что-то не так с типом прямой")
-
         root.typewrite("{}".format(int(self.t)))
 
         root.press("enter")
