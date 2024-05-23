@@ -27,6 +27,7 @@ speeds = [i for i in range(10,90,10)]   # Поменять скорости та
 # Подсчет количества файлов результатов в одной папке
 l_way_type = len(way_type)
 l_faults = len(faults)
+
 l_profiles = len(profiles)
 l_speeds = len(speeds)
 

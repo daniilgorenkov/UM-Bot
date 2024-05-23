@@ -44,10 +44,10 @@ class UM_bot:
         Выбор времени на которое бот будет застывать, пока идет расчет
         """
         if self.way_type != "straight" and self.speed < 40:
-            self.wait_status_bar(int(self.t+60))
+            self.wait_status_bar(int(self.t+280))
         
         elif self.way_type != "straight" and self.speed >= 40:
-            self.wait_status_bar(int(self.t+25))
+            self.wait_status_bar(int(self.t+60))
 
 
     def save_files(self,v:float):
