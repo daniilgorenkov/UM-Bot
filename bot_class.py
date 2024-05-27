@@ -44,9 +44,15 @@ class UM_bot:
         Выбор времени на которое бот будет застывать, пока идет расчет
         """
         if self.way_type != "straight" and self.speed < 40:
-            self.wait_status_bar(int(self.t+280))
+            self.wait_status_bar(int(self.t+300))
         
         elif self.way_type != "straight" and self.speed >= 40:
+            self.wait_status_bar(int(self.t+60))
+        
+        elif self.way_type == "straight" and self.speed < 40:
+            self.wait_status_bar(int(self.t+300))
+        
+        elif self.way_type == "straight" and self.speed >= 40:
             self.wait_status_bar(int(self.t+60))
 
 
