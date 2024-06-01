@@ -1,24 +1,16 @@
-import sys
 import os 
 from time import sleep
 from bot_class import UM_bot
-import keyboard
-from start_app import get_model_path, start_app, is_running
+from start_app import get_model_path, start_app
 from loguru import logger
 
 
-running = is_running() # Проверка на то была ли программа запущена ранее
-
-if running == True:
-    pass
-
-elif running == False:
-    PATH = get_model_path() # получение пути до файла umsimul.exe
-    start_app(PATH)
+PATH = get_model_path() # получение пути до файла umsimul.exe
+start_app(PATH)
 
 sleep(4)
 
-wagons = ["empty","loaded"]
+wagons = ["empty"]
 way_type = ["straight"]
 faults = ["normal", "polzun15","ellips10"]
 profiles = ["newwagonw", "greb_26", "gost","greb_28", "greb_30", "greb_24"]  #CHANGE PROFILE , "greb_26", "gost","greb_28", "greb_30"
@@ -44,9 +36,6 @@ for wagon in range(len(wagons)):                 # прохожусь по вс�
             for profile in range(len(profiles)): # прохожусь по всем профилям колес
                 for speed in range(len(speeds)): # прохожусь по всем скоростям
                     
-                    if keyboard.is_pressed("f5") == True: # если нажата f5, то скрипт прерывается
-                        sys.exit(1)
-
                     # Экземпляр класса
                     helper = UM_bot(wagons[wagon],way_type[way],faults[fault],speeds[speed],profiles[profile])
 
